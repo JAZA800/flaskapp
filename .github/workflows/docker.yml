@@ -10,6 +10,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check secrets
+        env:
+          U: ${{ secrets.DOCKERHUB_USERNAME }}
+          T: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          [ -n "$U" ] && echo "username set" || echo "username EMPTY"
+          [ -n "$T" ] && echo "token set" || echo "token EMPTY"
+
       - uses: docker/setup-buildx-action@v3
 
       - uses: docker/login-action@v3
